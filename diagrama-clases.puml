@@ -1,0 +1,89 @@
+@startuml Modelo
+
+class Controlador {
+
+    void mostrarSaldo(int saldo)
+    int establecerApuesta()
+    boolean pideCarta()
+    void mostrarMano(int recuento, List<Carta> cartas)
+    void mostrarCroupier(int recuento, List<Carta> cartas)
+    void finDeRonda(boolean victoria)
+    boolean seguirJugando()
+
+}
+class Juego {
+
+    static final int APUESTA_MINIMA
+    boolean comprobarSaldo()
+    void iniciarRonda()
+    void bucleDeJuego()
+    void ingresarSaldo(int saldo)
+    void finalizarJuego(boolean saldoBajoMinimo)
+
+}
+class Jugador{
+    
+    int saldo
+    int getSaldo()
+    void setSaldo(int saldo)
+    void addCarta(Carta carta)
+    void ingresarApuesta(int apuesta)
+    void retirarApuesta(int apuesta)
+    int sumaCartas()
+    List<Carta> getCartas()
+
+}
+class Banca{
+
+    void addCarta(Carta carta)
+    int sumaCartas()
+
+}
+class Baraja{
+
+    Pile<Carta> cartasSinUsar
+    List<Carta> cartasEnUso
+    List<Carta> cartasDescartadas
+    Carta cogerCarta()
+
+}
+class Mano{
+
+    List<Carta> cartas
+    List<Carta> getCartas()
+    void addCarta(Carta carta)
+    int sumaCartas()
+
+}
+class Carta
+enum Palo
+class CartaAs extends Carta
+class CartaNormal extends Carta
+class CartaFigura extends Carta
+class Ronda{
+
+    int apuesta
+    Ronda(Baraja baraja)
+    void ejecutarRonda()
+    boolean comprobarSiBlackjackJugador()
+    boolean jugadorPasado()
+    void repartirCartas()
+    void introducirApuesta()
+
+}
+
+
+
+Juego --> Jugador
+Juego -up-> Banca
+Juego -up-> Baraja
+Ronda <- Juego
+Ronda -> Jugador
+Ronda -> Baraja
+Ronda -> Banca
+Jugador -> Mano
+Banca -> Mano
+Carta --* Mano
+Carta -> Palo
+
+@enduml
