@@ -4,50 +4,39 @@ public class Carta {
 
     private int numCarta;
     private int valor;
-    private int sumaCartas = 0;
-    int primeraCarta;
-    int segundaCarta;
 
-    public Carta(int numCarta, int valor) {
+    public Carta(int numCarta) {
         this.numCarta = numCarta;
-        this.valor = valor;
+        setValor(numCarta);
     }
-    
-    public int getNumCarta(){
+
+    public int getNumCarta() {
         return this.numCarta;
     }
 
-    public void setNumCarta(int numCarta){
+    public void setNumCarta(int numCarta) {
         this.numCarta = numCarta;
+        setValor(numCarta);
     }
 
-    public int getValor(){
+    public int getValor() {
         return this.valor;
     }
-    
-    public void setValor(int numCarta) {
 
-        if (numCarta == 11) {
-            valor = 10;
-        } else if (numCarta == 12) {
-            valor = 10;
-        } else if (numCarta == 13) {
+    // El valor de la carta se calcula a partir de su numero (1-13).
+    // El As (numCarta == 1) se asigna inicialmente a 11; es la mano (Mano.sumaCartas())
+    // la que decide si debe contar como 1 cuando la suma total se pasa de 21.
+    public void setValor(int numCarta) {
+        if (numCarta == 11 || numCarta == 12 || numCarta == 13) {
             valor = 10;
         } else if (numCarta == 1) {
-            if (this.sumaCartas > 21) {
-                valor = 1;
-            } else {
-                valor = 11;
-            }
+            valor = 11;
         } else {
             valor = numCarta;
         }
     }
 
-    public void sumaCartas(int numCarta){
-        int sumaCarta = numCarta + numCarta;
-        System.out.println("Conteo de tu mano: " +  sumaCarta);
+    public boolean esAs() {
+        return this.numCarta == 1;
     }
 }
-
-
